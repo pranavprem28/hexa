@@ -3,35 +3,44 @@ import { ServiceBase } from "./service-base"
 export class ProductsService extends ServiceBase {
 
   static async getProducts() {
-    const response = await fetch(this.getUrl("/products"), {
-      cache: "no-store",
-    })
+    try {
+      const response = await fetch(this.getUrl("/products"), {
+        cache: "no-store",
+      })
 
-    if (!response.ok) {
-      throw new Error("Failed to fetch products")
+      if (!response.ok) {
+        console.error("API Error:", response.status)
+        return []   // DO NOT THROW
+      }
+
+      return await response.json()
+    } catch (error) {
+      console.error("Fetch failed:", error)
+      return []   // DO NOT THROW
     }
-
-    return await response.json()
   }
 
   static async getProductById(id: string | number) {
-    const numericId = Number(id)
+    try {
+      const numericId = Number(id)
 
-    if (!numericId || isNaN(numericId)) {
-      throw new Error("Invalid product ID")
-    }
-
-    const response = await fetch(
-      this.getUrl(`/products/${numericId}`),
-      {
-        cache: "no-store",
+      if (!numericId || isNaN(numericId)) {
+        return null   // DO NOT THROW
       }
-    )
 
-    if (!response.ok) {
-      throw new Error(`Product with ID ${numericId} not found`)
+      const response = await fetch(
+        this.getUrl(`/products/${numericId}`),
+        { cache: "no-store" }
+      )
+
+      if (!response.ok) {
+        return null   // DO NOT THROW
+      }
+
+      return await response.json()
+    } catch (error) {
+      console.error("Fetch failed:", error)
+      return null   // DO NOT THROW
     }
-
-    return await response.json()
   }
 }
