@@ -1,46 +1,32 @@
-import { ServiceBase } from "./service-base"
-
-export class ProductsService extends ServiceBase {
+export class ProductsService {
 
   static async getProducts() {
     try {
-      const response = await fetch(this.getUrl("/products"), {
-        cache: "no-store",
-      })
+      const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
+      const res = await fetch(`${baseUrl}/api/products`, { cache: "no-store" })
 
-      if (!response.ok) {
-        console.error("API Error:", response.status)
-        return []   // DO NOT THROW
-      }
+      if (!res.ok) return []
 
-      return await response.json()
+      return await res.json()
     } catch (error) {
       console.error("Fetch failed:", error)
-      return []   // DO NOT THROW
+      return []
     }
   }
 
   static async getProductById(id: string | number) {
     try {
       const numericId = Number(id)
+      if (!numericId || isNaN(numericId)) return null
 
-      if (!numericId || isNaN(numericId)) {
-        return null   // DO NOT THROW
-      }
+      const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
+      const res = await fetch(`${baseUrl}/api/products/${numericId}`, { cache: "no-store" })
 
-      const response = await fetch(
-        this.getUrl(`/products/${numericId}`),
-        { cache: "no-store" }
-      )
-
-      if (!response.ok) {
-        return null   // DO NOT THROW
-      }
-
-      return await response.json()
+      if (!res.ok) return null
+      return await res.json()
     } catch (error) {
       console.error("Fetch failed:", error)
-      return null   // DO NOT THROW
+      return null
     }
   }
 }

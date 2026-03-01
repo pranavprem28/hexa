@@ -1,8 +1,11 @@
 import { NextResponse } from "next/server"
 
-export async function GET() {
+export async function GET(req: Request) {
+  const id = req.url.split("/").pop()
+  if (!id) return NextResponse.json({ error: "Missing ID" }, { status: 400 })
+
   try {
-    const res = await fetch("https://fakestoreapi.com/products", {
+    const res = await fetch(`https://fakestoreapi.com/products/${id}`, {
       headers: { "User-Agent": "Mozilla/5.0", Accept: "application/json" },
       cache: "no-store",
     })

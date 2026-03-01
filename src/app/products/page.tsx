@@ -1,12 +1,10 @@
 import { ProductsService } from "../services/products-service"
 import ProductList from "../components/ProductList"
-
 export const dynamic = "force-dynamic"
 
 export default async function Products() {
   const products = await ProductsService.getProducts()
 
-  // 🛡 Safety check
   if (!products || !Array.isArray(products) || products.length === 0) {
     return (
       <div className="text-center py-20 text-gray-500">
