@@ -46,9 +46,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Promo Section */}
-     import Image from "next/image"
-import Link from "next/link"
+   
+ 
 
 {/* Season Collection Section */}
 <section className="py-28 bg-gray-50">
