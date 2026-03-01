@@ -4,7 +4,7 @@ export class ProductsService extends ServiceBase {
 
   static async getProducts() {
     const response = await fetch(this.getUrl("/products"), {
-      next: { revalidate: 60 },
+      cache: "no-store",
     })
 
     if (!response.ok) {
@@ -24,7 +24,7 @@ export class ProductsService extends ServiceBase {
     const response = await fetch(
       this.getUrl(`/products/${numericId}`),
       {
-        next: { revalidate: 120 },
+        cache: "no-store",
       }
     )
 
@@ -32,6 +32,6 @@ export class ProductsService extends ServiceBase {
       throw new Error(`Product with ID ${numericId} not found`)
     }
 
-    return await response.json()   // ✅ FIXED
+    return await response.json()
   }
 }

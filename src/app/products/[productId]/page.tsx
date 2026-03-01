@@ -2,6 +2,8 @@ import Image from "next/image"
 import { notFound } from "next/navigation"
 import { ProductsService } from "@/app/services/products-service"
 
+export const dynamic = "force-dynamic"
+
 interface ProductDetailProps {
   params: Promise<{
     productId: string
@@ -11,10 +13,7 @@ interface ProductDetailProps {
 export default async function ProductDetail({
   params,
 }: ProductDetailProps) {
-
-  // ✅ unwrap params (IMPORTANT in Next 15)
   const { productId } = await params
-
   const id = Number(productId)
 
   if (!id || isNaN(id)) {
@@ -28,7 +27,6 @@ export default async function ProductDetail({
       <section className="max-w-6xl mx-auto px-6 py-20">
         <div className="grid md:grid-cols-2 gap-12">
 
-          {/* Image */}
           <div className="bg-gray-50 rounded-xl flex items-center justify-center p-8">
             <Image
               src={product.image}
@@ -39,7 +37,6 @@ export default async function ProductDetail({
             />
           </div>
 
-          {/* Details */}
           <div>
             <h1 className="text-2xl font-semibold text-gray-900">
               {product.title}
