@@ -1,12 +1,10 @@
 export class ProductsService {
+  private static API = "https://fakestoreapi.com"
 
   static async getProducts() {
     try {
-      const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
-      const res = await fetch(`${baseUrl}/api/products`, { cache: "no-store" })
-
+      const res = await fetch(`${this.API}/products`, { cache: "no-store" })
       if (!res.ok) return []
-
       return await res.json()
     } catch (error) {
       console.error("Fetch failed:", error)
@@ -19,9 +17,7 @@ export class ProductsService {
       const numericId = Number(id)
       if (!numericId || isNaN(numericId)) return null
 
-      const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
-      const res = await fetch(`${baseUrl}/api/products/${numericId}`, { cache: "no-store" })
-
+      const res = await fetch(`${this.API}/products/${numericId}`, { cache: "no-store" })
       if (!res.ok) return null
       return await res.json()
     } catch (error) {
