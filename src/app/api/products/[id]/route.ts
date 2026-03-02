@@ -1,19 +1,21 @@
 import { NextResponse } from "next/server"
 
-export async function GET(req: Request) {
-  const id = req.url.split("/").pop()
-  if (!id) return NextResponse.json({ error: "Missing ID" }, { status: 400 })
-
+export async function GET(
+  _req: Request,
+  { params }: { params: { id: string } }
+) {
   try {
-    const res = await fetch(`https://fakestoreapi.com/products/${id}`, {
-      headers: { "User-Agent": "Mozilla/5.0", Accept: "application/json" },
+    const res = await fetch(`https://fakestoreapi.com/products/${params.id}`, {
       cache: "no-store",
     })
-    if (!res.ok) return NextResponse.json({ error: "Failed" }, { status: res.status })
+
+    if (!res.ok) {
+      return NextResponse.json(null, { status: res.status })
+    }
+
     const data = await res.json()
     return NextResponse.json(data)
-  } catch (err) {
-    console.error("Fetch failed:", err)
-    return NextResponse.json({ error: "Server error" }, { status: 500 })
+  } catch (e) {
+    return NextResponse.json(null, { status: 500 })
   }
 }
