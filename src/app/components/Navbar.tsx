@@ -14,85 +14,106 @@ export default function Navbar() {
     setMounted(true)
   }, [])
 
-  // Close menu on route click (good UX)
   const closeMobile = () => setMobileOpen(false)
 
   return (
     <nav className="bg-white border-b border-gray-200 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between gap-4">
+        
         {/* Logo */}
-        <Link href="/" className="text-xl font-semibold tracking-tight text-gray-900">
+        <Link
+          href="/"
+          className="text-xl font-semibold tracking-tight text-gray-900"
+          onClick={closeMobile}
+        >
           Hexa
         </Link>
 
-        {/* Search Bar (desktop only) */}
+        {/* Desktop Search */}
         <div className="flex-1 max-w-md hidden md:flex">
           <div className="relative w-full">
             <Search
-              size={26}
+              size={20}
               className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500"
             />
             <input
               type="text"
               placeholder="Search products..."
-              className="w-full bg-gray-300 border border-gray-800 rounded-full py-2 pl-10 pr-4 text-sm
+              className="w-full bg-gray-100 border border-gray-300 rounded-full py-2 pl-10 pr-4 text-sm
               text-gray-900 placeholder:text-gray-600
               focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition"
             />
           </div>
         </div>
 
-        {/* Desktop Nav */}
-        <div className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-600">
-          <Link href="/products" className="hover:text-gray-900 transition">
+        {/* Desktop Navigation */}
+        <div className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-700">
+          <Link
+            href="/products"
+            className="hover:text-black transition"
+          >
             Products
           </Link>
-          <Link href="/about" className="hover:text-gray-900 transition">
+
+          <Link
+            href="/about"
+            className="hover:text-black transition"
+          >
             About
           </Link>
-          <Link href="/contact" className="hover:text-gray-900 transition">
+
+          <Link
+            href="/contact"
+            className="hover:text-black transition"
+          >
             Contact
           </Link>
 
-          <Link href="/cart" className="relative hover:text-gray-900 transition">
+          {/* Cart */}
+          <Link
+            href="/cart"
+            className="relative hover:text-black transition"
+          >
             Cart
             {mounted && totalItems > 0 && (
-              <span className="absolute -top-2 -right-3 bg-gray-900 text-white text-[10px] px-2 py-0.5 rounded-full">
+              <span className="absolute -top-2 -right-4 bg-black text-white text-xs px-2 py-0.5 rounded-full">
                 {totalItems}
               </span>
             )}
           </Link>
         </div>
 
-        {/* Mobile actions */}
+        {/* Mobile Actions */}
         <div className="md:hidden flex items-center gap-3">
-          {/* Cart icon/text on mobile (optional but useful) */}
-          <Link href="/cart" className="relative text-sm font-medium text-gray-900">
+          <Link
+            href="/cart"
+            className="relative text-sm font-medium text-gray-900"
+          >
             Cart
             {mounted && totalItems > 0 && (
-              <span className="absolute -top-2 -right-3 bg-gray-900 text-white text-[10px] px-2 py-0.5 rounded-full">
+              <span className="absolute -top-2 -right-4 bg-black text-white text-xs px-2 py-0.5 rounded-full">
                 {totalItems}
               </span>
             )}
           </Link>
 
-          {/* Hamburger */}
           <button
             type="button"
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
             onClick={() => setMobileOpen((v) => !v)}
-            className="inline-flex items-center justify-center rounded-lg border border-gray-300 p-2 text-gray-900 hover:bg-gray-50 active:scale-[0.98] transition"
+            className="inline-flex items-center justify-center rounded-lg border border-gray-300 p-2 text-gray-900 hover:bg-gray-100 transition"
           >
             {mobileOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu Panel */}
+      {/* Mobile Menu */}
       {mobileOpen && (
         <div className="md:hidden border-t border-gray-200 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 space-y-3">
+
             {/* Mobile Search */}
             <div className="relative">
               <Search
@@ -102,7 +123,7 @@ export default function Navbar() {
               <input
                 type="text"
                 placeholder="Search products..."
-                className="w-full bg-gray-200 border border-gray-300 rounded-full py-2 pl-9 pr-4 text-sm
+                className="w-full bg-gray-100 border border-gray-300 rounded-full py-2 pl-10 pr-4 text-sm
                 text-gray-900 placeholder:text-gray-600
                 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition"
               />
