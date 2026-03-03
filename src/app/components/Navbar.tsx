@@ -19,7 +19,6 @@ export default function Navbar() {
   return (
     <nav className="bg-white border-b border-gray-200 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between gap-4">
-        
         {/* Logo */}
         <Link
           href="/"
@@ -48,32 +47,18 @@ export default function Navbar() {
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-700">
-          <Link
-            href="/products"
-            className="hover:text-black transition"
-          >
+          <Link href="/products" className="hover:text-black transition">
             Products
           </Link>
-
-          <Link
-            href="/about"
-            className="hover:text-black transition"
-          >
+          <Link href="/about" className="hover:text-black transition">
             About
           </Link>
-
-          <Link
-            href="/contact"
-            className="hover:text-black transition"
-          >
+          <Link href="/contact" className="hover:text-black transition">
             Contact
           </Link>
 
           {/* Cart */}
-          <Link
-            href="/cart"
-            className="relative hover:text-black transition"
-          >
+          <Link href="/cart" className="relative hover:text-black transition">
             Cart
             {mounted && totalItems > 0 && (
               <span className="absolute -top-2 -right-4 bg-black text-white text-xs px-2 py-0.5 rounded-full">
@@ -85,10 +70,7 @@ export default function Navbar() {
 
         {/* Mobile Actions */}
         <div className="md:hidden flex items-center gap-3">
-          <Link
-            href="/cart"
-            className="relative text-sm font-medium text-gray-900"
-          >
+          <Link href="/cart" className="relative text-sm font-medium text-gray-900">
             Cart
             {mounted && totalItems > 0 && (
               <span className="absolute -top-2 -right-4 bg-black text-white text-xs px-2 py-0.5 rounded-full">
@@ -113,7 +95,6 @@ export default function Navbar() {
       {mobileOpen && (
         <div className="md:hidden border-t border-gray-200 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 space-y-3">
-
             {/* Mobile Search */}
             <div className="relative">
               <Search
