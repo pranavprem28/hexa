@@ -8,11 +8,7 @@ export const metadata = {
   description: "A minimal ecommerce experience built with Next.js",
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body className="bg-background text-foreground antialiased">
