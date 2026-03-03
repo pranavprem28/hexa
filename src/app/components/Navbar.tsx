@@ -10,9 +10,7 @@ export default function Navbar() {
   const [mounted, setMounted] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
 
-  useEffect(() => {
-    setMounted(true)
-  }, [])
+  useEffect(() => setMounted(true), [])
 
   const closeMobile = () => setMobileOpen(false)
 
@@ -57,7 +55,6 @@ export default function Navbar() {
             Contact
           </Link>
 
-          {/* Cart */}
           <Link href="/cart" className="relative hover:text-black transition">
             Cart
             {mounted && totalItems > 0 && (
